@@ -8,12 +8,16 @@ class notesApp {
     this.notesList = document.getElementById("notes-list");
 
     // Initiliaze app state
-
-    // Load notes from local storage and display them
-    this.loadNotes = document.addEventListener("DOMContentLoaded", loadNotes);
-    // Add note event
-    this.noteForm = noteForm.addEventListener("submit", addNote);
+    this.initialize();
   }
+
+  initialize() {
+    // Load notes from local storage and display them
+    document.addEventListener("DOMContentLoaded", () => this.loadNotes());
+    // Add note event
+    this.noteForm = noteForm.addEventListener("submit", (e) => this.addNote(e));
+  }
+
   // Function to add a new note
   addNote(e) {
     e.preventDefault();
@@ -97,3 +101,5 @@ class notesApp {
     });
   }
 }
+
+new notesApp();
