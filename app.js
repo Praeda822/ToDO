@@ -57,14 +57,14 @@ class notesApp {
 
   // Function to save a note to local storage
   saveNoteToLocalStorage(note) {
-    this.notes = getNotesFromLocalStorage();
+    let notes = getNotesFromLocalStorage();
     notes.push(note);
     localStorage.setItem("notes", JSON.stringify(notes));
   }
 
   // Function to get notes from local storage
   getNotesFromLocalStorage() {
-    this.notes = localStorage.getItem("notes");
+    let notes = localStorage.getItem("notes");
     return notes ? JSON.parse(notes) : [];
   }
 
