@@ -46,15 +46,13 @@ class notesApp {
   }
 
   // Function to delete a note
-  deleteNote() {
-    this.li = this.parentElement;
-    this.noteText = li.textContent.replace("Delete", "").trim();
-
+  deleteNote(deleteBtn) {
+    const li = deleteBtn.parentElement;
+    const noteText = li.textContent.replace("Delete", "").trim();
     // Remove note from local storage
-    deleteNoteFromLocalStorage(noteText);
-
+    this.deleteNoteFromLocalStorage(noteText);
     // Remove list item from the notes list
-    notesList.removeChild(li);
+    this.notesList.removeChild(li);
   }
 
   // Function to save a note to local storage
