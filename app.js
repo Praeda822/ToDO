@@ -21,32 +21,26 @@ class notesApp {
   // Function to add a new note
   addNote(e) {
     e.preventDefault();
-
     // Get the note text
-    this.noteText = noteInput.value;
-
+    const noteText = noteInput.value;
     // Create list item element
-    this.li = document.createElement("li");
+    const li = document.createElement("li");
     li.textContent = noteText;
-
-    // Call delBtn function
-    delBtn().onclick();
-
-    // Append list item to the notes list
-    notesList.appendChild(li);
-
+    // Create delete button
+    this.createDelBtn(li);
+    // Appends list item to the notes list
+    this.notesList.appendChild(li);
     // Save note to local storage
-    saveNoteToLocalStorage(noteText);
-
-    // Clear input
-    noteInput.value = "";
+    this.saveNoteToLocalStorage(noteText);
+    // Clear any user input
+    this.noteInput.value = "";
   }
 
-  delBtn() {
-    this.deleteBtn = document.createElement("button");
+  createDelBtn(li) {
+    const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
     deleteBtn.classList.add("delete");
-    deleteBtn.onclick = deleteNote;
+    deleteBtn.addEventListener("click", () => this.deleteNote(deleteBtn));
     // Append delete button to the list item
     li.appendChild(deleteBtn);
   }
