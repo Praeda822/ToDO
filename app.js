@@ -1,6 +1,6 @@
 "use strict";
 
-class notesApp {
+class NotesApp {
   constructor() {
     // Selectors
     this.noteForm = document.getElementById("note-form");
@@ -15,14 +15,14 @@ class notesApp {
     // Load notes from local storage and display them
     document.addEventListener("DOMContentLoaded", () => this.loadNotes());
     // Add note event
-    this.noteForm = noteForm.addEventListener("submit", (e) => this.addNote(e));
+    this.noteForm.addEventListener("submit", (e) => this.addNote(e));
   }
 
   // Function to add a new note
   addNote(e) {
     e.preventDefault();
     // Get the note text
-    const noteText = noteInput.value;
+    const noteText = this.noteInput.value;
     // Create list item element
     const li = document.createElement("li");
     li.textContent = noteText;
@@ -57,7 +57,7 @@ class notesApp {
 
   // Function to save a note to local storage
   saveNoteToLocalStorage(note) {
-    let notes = getNotesFromLocalStorage();
+    let notes = this.getNotesFromLocalStorage();
     notes.push(note);
     localStorage.setItem("notes", JSON.stringify(notes));
   }
@@ -70,28 +70,23 @@ class notesApp {
 
   // Function to delete a note from local storage
   deleteNoteFromLocalStorage(note) {
-    this.notes = getNotesFromLocalStorage();
+    let notes = this.getNotesFromLocalStorage();
     notes = notes.filter((n) => n !== note);
     localStorage.setItem("notes", JSON.stringify(notes));
   }
 
   // Function to load notes from local storage and display them
   loadNotes() {
-    this.notes = getNotesFromLocalStorage();
+    const notes = this.getNotesFromLocalStorage();
     notes.forEach((note) => {
-      this.li = document.createElement("li");
+      const li = document.createElement("li");
       li.textContent = note;
 
-      this.deleteBtn = document.createElement("button");
-      deleteBtn.textContent = "Delete";
-      deleteBtn.classList.add("delete");
-      deleteBtn.onclick = deleteNote;
+      this.createDelBtn(li);
 
-      li.appendChild(deleteBtn);
-
-      notesList.appendChild(li);
+      this.notesList.appendChild(li);
     });
   }
 }
 
-new notesApp();
+new NotesApp();
